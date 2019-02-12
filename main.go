@@ -6,9 +6,9 @@ import (
 	)
 
 func main() {
-	 data := Algorithm.CreateRandomList(10000,10000)
+	 data := Algorithm.CreateRandomList(10,100)
 	  s := Algorithm.NewSort(data)
-	  resp := s.BubbleSort()
+	  resp := s.SelectSort()
 	  fmt.Println(resp)
 	  fmt.Println("execute time:",s.Interval)
 	

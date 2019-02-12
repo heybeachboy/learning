@@ -1,6 +1,8 @@
 package Algorithm
 
-import "time"
+import (
+	"time"
+)
 
 type Sort struct {
 	Data      []int
@@ -33,6 +35,7 @@ func (s *Sort) endRun() {
 
 /**
  * Bubble Sort
+ * O(n^2)
  */
 
 func (s *Sort) BubbleSort() ([]int) {
@@ -53,37 +56,73 @@ func (s *Sort) BubbleSort() ([]int) {
 	return list
 }
 
-func (s *Sort) SelectSort() ([]int) {
+/**
+ *select sort
+ *O(n^2)
+ */
 
-	return nil
+func (s *Sort) SelectSort() ([]int) {
+	s.startRun()
+	list := s.Data
+	size := len(list)
+	for i := 0; i < size-1; i++ {
+		index := i
+		for j := i + 1; j < size; j++ {
+			if list[j] >= list[index] {
+				continue
+			}
+			index = j
+		}
+
+		if i == index {
+			continue
+		}
+
+		list[i], list[index] = list[index], list[i]
+	}
+
+	s.endRun()
+	return list
 }
 
 func (s *Sort) InsertSort() ([]int) {
-
-	return nil
+	s.startRun()
+	list := s.Data
+	s.endRun()
+	return list
 }
 
 func (s *Sort) MergeSort() ([]int) {
-
-	return nil
+	s.startRun()
+	list := s.Data
+	s.endRun()
+	return list
 }
 
 func (s *Sort) ShellSort() ([]int) {
-
-	return nil
+	s.startRun()
+	list := s.Data
+	s.endRun()
+	return list
 }
 
 func (s *Sort) QuickSort() ([]int) {
-
-	return nil
+	s.startRun()
+	list := s.Data
+	s.endRun()
+	return list
 }
 
 func (s *Sort) HeapSort() ([]int) {
-
-	return nil
+	s.startRun()
+	list := s.Data
+	s.endRun()
+	return list
 }
 
 func (s *Sort) RadixSort() ([]int) {
-
-	return nil
+	s.startRun()
+	list := s.Data
+	s.endRun()
+	return list
 }
