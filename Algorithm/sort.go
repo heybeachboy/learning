@@ -85,9 +85,30 @@ func (s *Sort) SelectSort() ([]int) {
 	return list
 }
 
+func (s *Sort) SelectSortForOptimize() {
+
+}
+
+/**
+ *insert sort
+ *O(n^2)
+ */
+
 func (s *Sort) InsertSort() ([]int) {
 	s.startRun()
 	list := s.Data
+	size := len(list)
+
+	for i := 1; i < size; i++ {
+		for j := i - 1; j >= 0; j-- {
+
+			if list[j] <= list[j+1] {
+				continue
+			}
+			list[j], list[j+1] = list[j+1], list[j]
+		}
+
+	}
 	s.endRun()
 	return list
 }
