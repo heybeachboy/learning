@@ -122,27 +122,91 @@ func (s *Sort) ShellSort() ([]int) {
 }
 
 /**
- *merge sort
- *
- *
+ 时间复杂度O(nlogn)
+ 归并排序
  */
 
-func (s *Sort) MergeSort() ([]int) {
-	s.startRun()
-	list := s.Data
-	s.endRun()
-	return list
+func (s *Sort)MergeSort(data []int,start, end int) {
+	if len(data) <=0 || start >= end {
+		return
+	}
+
+	mid := start + ((end - start) / 2)
+	s.MergeSort(data,start,mid)
+	s.MergeSort(data,mid+1, end)
+	s.merge(data, start, mid, end)
+
+
 }
 
-func (s *Sort)merge() {
+func (s *Sort)merge(data []int, start, mid, end int) {
+
+	total := (end - start) + 1
+	temp := make([]int,total)
+	i := start
+	j := mid+1
+
+	for t:=0;t < total; t++ {
+		if i <=mid && j > end {
+			temp[t] = data[i]
+			i++
+			continue
+		}
+
+		if i > mid && j <= end {
+			temp[t] = data[j]
+			j++
+			continue
+
+		}
+
+		if data[i] <  data[j]  {
+			temp[t] = data[i]
+			i++
+		} else {
+			temp[t] = data[j]
+			j++
+		}
+	}
+
+	for k,v :=range temp {
+		data[start + k] = v
+	}
+
 
 }
 
-func (s *Sort) QuickSort() ([]int) {
-	s.startRun()
-	list := s.Data
-	s.endRun()
-	return list
+/**
+  时间复杂度(nlogn)
+  快速排序法
+ */
+
+func (s *Sort)QuickSort(array []int, left int, right int)  {
+
+
+	if left >= right {
+		return
+	}
+	n := s.partition(array,left,right)
+	s.QuickSort(array, left, n-1)
+	s.QuickSort(array, n+1, right)
+
+}
+
+func (s *Sort)partition(data []int,l,r int)(int) {
+
+	focus := data[l]
+	j := l
+	for i := l+1; i<= r; i++ {
+		if data[i] < focus {
+			data[j+1], data[i] = data[i],data[j+1]
+			j++
+		}
+	}
+
+	data[l],data[j] = data[j], data[l]
+	return j
+
 }
 
 func (s *Sort) HeapSort() ([]int) {
