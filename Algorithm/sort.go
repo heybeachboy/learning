@@ -113,6 +113,20 @@ func (s *Sort) InsertSort() ([]int) {
 	return list
 }
 
+func (s *Sort) ShellSort() ([]int) {
+	s.startRun()
+	list := s.Data
+	
+	s.endRun()
+	return list
+}
+
+/**
+ *merge sort
+ *
+ *
+ */
+
 func (s *Sort) MergeSort() ([]int) {
 	s.startRun()
 	list := s.Data
@@ -120,11 +134,8 @@ func (s *Sort) MergeSort() ([]int) {
 	return list
 }
 
-func (s *Sort) ShellSort() ([]int) {
-	s.startRun()
-	list := s.Data
-	s.endRun()
-	return list
+func (s *Sort)merge() {
+
 }
 
 func (s *Sort) QuickSort() ([]int) {
