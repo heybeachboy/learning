@@ -1,6 +1,9 @@
 package Algorithm
 
-import "fmt"
+import (
+	"fmt"
+)
+
 
 type Heap struct {
 	Count    int //交换次数
@@ -96,7 +99,7 @@ type MaxHeap struct {
 //获取大根堆的，推顶元素
 func (m *MaxHeap) Peek() (int) {
 	if m.Count < 0 {
-		log.Info("堆数据为空")
+		//log.Info("堆数据为空")
 		return -1
 	}
 	Max := m.Pools[0]
