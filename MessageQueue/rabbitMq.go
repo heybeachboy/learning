@@ -13,13 +13,28 @@ const (
 )
 
 type RabbitMq struct {
-	conn    *amqp.Connection
-	channel *amqp.Channel
-	err     error
+	url       string
+	routeKey  string
+	queueName string
+	conn      *amqp.Connection
+	channel   *amqp.Channel
+	err       error
 }
 
-func (r *RabbitMq) InitConnections() (error) {
-	r.conn, r.err = amqp.Dial(MqUrl)
+func NewRabbitMqClient(url, routeKey, queueName string) (*RabbitMq) {
+	client := &RabbitMq{url: url, routeKey: routeKey, queueName: queueName, conn: nil, channel: nil, err: nil}
+	err := client.initConnections()
+
+	if err != nil {
+		fmt.Println("init rabbit client failed:",err.Error())
+		return nil
+	}
+	return client
+
+}
+
+func (r *RabbitMq) initConnections() (error) {
+	r.conn, r.err = amqp.Dial(r.url)
 
 	if r.err != nil {
 		return r.returnError("connection amqp error")
@@ -35,14 +50,14 @@ func (r *RabbitMq) InitConnections() (error) {
 }
 
 func (r *RabbitMq) Push(message []byte) (error) {
-	return r.channel.Publish("", QueueName, false, false, amqp.Publishing{
+	return r.channel.Publish(r.routeKey, r.queueName, false, false, amqp.Publishing{
 		ContentType: "text/plain",
 		Body:        message})
 }
 
 func (r *RabbitMq) Receiver(queueName string) {
 	var delivery <-chan amqp.Delivery
-	delivery, r.err = r.channel.Consume(queueName, "", true, false, false, false, nil)
+	delivery, r.err = r.channel.Consume(r.queueName, "", true, false, false, false, nil)
 	r.HandleDelivery(delivery)
 }
 

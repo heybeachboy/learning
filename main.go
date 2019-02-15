@@ -19,15 +19,16 @@ func main() {
 	  resp :=s.MergeSort()
 	  fmt.Println("sort after:",resp)
 	  fmt.Println("execute time:",s.Interval)
-	  Rabbit :=MessageQueue.RabbitMq{}
-	  Rabbit.InitConnections()
+	  Rabbit :=MessageQueue.NewRabbitMqClient(MessageQueue.MqUrl,MessageQueue.Exchange,MessageQueue.QueueName)
 	  err := Rabbit.Push([]byte(time.Now().String()))
+	  err = Rabbit.Push([]byte(time.Now().String()))
+	  err = Rabbit.Push([]byte(time.Now().String()))
 	  Rabbit.Receiver("send")
 	  fmt.Println("reply:",err)
 	  var sum int32
 	  //sum = 21608
 	  //sum = 21191
 	    sum = 21531
-	  fmt.Println(fmt.Sprintf("%c",sum))
+	  fmt.Println(fmt.Sprintf("%x",sum))
 
 	  }
