@@ -22,6 +22,7 @@ func main() {
 	  Rabbit :=MessageQueue.RabbitMq{}
 	  Rabbit.InitConnections()
 	  err := Rabbit.Push([]byte(time.Now().String()))
+	  Rabbit.Receiver("send")
 	  fmt.Println("reply:",err)
 	  var sum int32
 	  //sum = 21608

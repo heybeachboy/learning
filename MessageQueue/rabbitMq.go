@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	QueueName = "UpToTop"
-	Exchange  = "uvbitpay.order"
+	QueueName = "send"
+	Exchange  = "order.send"
 	MqUrl     = "amqp://admin:7q4a1z@192.168.0.249:5672/"
 )
 
@@ -48,7 +48,7 @@ func (r *RabbitMq) Receiver(queueName string) {
 
 func (r *RabbitMq) HandleDelivery(delivery <-chan amqp.Delivery) {
 	for msg := range delivery {
-		fmt.Println("receive ok:", msg.Body)
+		fmt.Println("receive ok:", string(msg.Body))
 		msg.Ack(true)
 	}
 
