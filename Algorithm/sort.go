@@ -188,15 +188,15 @@ func (s *Sort) merge(data []int, start, mid, end int) {
   快速排序法
  */
 
-func (s *Sort) QuickSort()([]int) {
+func (s *Sort) QuickSort() ([]int) {
 	s.startRun()
-	s.divideLR(s.Data,0,len(s.Data)-1)
+	s.divideLR(s.Data, 0, len(s.Data)-1)
 	s.endRun()
 	return s.Data
 
 }
 
-func (s *Sort)divideLR(array []int, left int, right int) {
+func (s *Sort) divideLR(array []int, left int, right int) {
 	if left >= right {
 		return
 	}
